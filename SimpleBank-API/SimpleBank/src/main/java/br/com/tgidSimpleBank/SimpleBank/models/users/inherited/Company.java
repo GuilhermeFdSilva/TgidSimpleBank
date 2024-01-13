@@ -21,4 +21,21 @@ public class Company extends User {
     private Double balance;
     @ManyToOne
     private Plan plan;
+
+    public boolean validateCnpj() {
+        return this.cnpj.replaceAll("\\D", "").length() == 14;
+    }
+
+    public void deposit(Double value) {
+        this.balance+=value;
+    }
+
+    public boolean withdrawal(Double value) {
+        if (this.balance < value) {
+            return false;
+        } else {
+            this.balance-=value;
+            return true;
+        }
+    }
 }
