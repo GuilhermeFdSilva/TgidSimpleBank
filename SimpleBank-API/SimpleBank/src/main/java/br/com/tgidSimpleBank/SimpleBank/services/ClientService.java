@@ -34,7 +34,13 @@ public class ClientService {
     }
 
     public List<Client> listClientsByCompany(Company company) {
-        return repository.findByCompanyId(company.getId());
+        List<Client> clients = repository.findByCompanyId(company.getId());
+
+        if (clients == null || clients.isEmpty()) {
+            throw new EntityNotFoundException("Clientes não encontrados");
+        }
+
+        return clients;
     }
 
     public Client validateLoginByCpf(Client client) {
