@@ -3,15 +3,13 @@ package br.com.tgidSimpleBank.SimpleBank.models.transactions;
 import br.com.tgidSimpleBank.SimpleBank.models.users.User;
 import br.com.tgidSimpleBank.SimpleBank.models.users.inherited.Company;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Date;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -22,6 +20,10 @@ public class Transaction {
     private Long id;
     @Column(nullable = false)
     private Double value;
+    @Column(nullable = false)
+    private Double administrativeFee;
+    @Column(nullable = false)
+    private Double totalValue;
     @ManyToOne
     private Company target;
     @ManyToOne
