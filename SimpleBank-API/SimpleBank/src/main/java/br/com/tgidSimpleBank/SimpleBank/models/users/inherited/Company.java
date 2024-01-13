@@ -1,9 +1,8 @@
 package br.com.tgidSimpleBank.SimpleBank.models.users.inherited;
 
+import br.com.tgidSimpleBank.SimpleBank.models.plans.Plan;
 import br.com.tgidSimpleBank.SimpleBank.models.users.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +19,6 @@ public class Company extends User {
     private String cnpj;
     @Column(columnDefinition = "DOUBLE DEFAULT 0.0")
     private Double balance;
+    @ManyToOne
+    private Plan plan;
 }
