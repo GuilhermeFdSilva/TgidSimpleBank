@@ -16,7 +16,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "transactions")
-public abstract class Transaction {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
