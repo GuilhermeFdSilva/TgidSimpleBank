@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,17 +15,16 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String name;
-    private String address;
-    @Column(columnDefinition = "DOUBLE DEFAULT 0.0")
-    private Double balance;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private Date createdAt;
 }

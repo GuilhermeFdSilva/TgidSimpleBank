@@ -18,4 +18,6 @@ import lombok.Setter;
 public class Company extends User {
     @Column(nullable = false)
     private String cnpj;
+    @Column(columnDefinition = "DOUBLE DEFAULT 0.0")
+    private Double balance;
 }

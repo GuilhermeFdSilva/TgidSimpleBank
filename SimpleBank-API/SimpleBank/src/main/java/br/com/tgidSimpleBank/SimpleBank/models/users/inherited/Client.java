@@ -16,4 +16,6 @@ import lombok.Setter;
 public class Client extends User {
     @Column(nullable = false)
     private String cpf;
+    @ManyToOne
+    private Company company;
 }
