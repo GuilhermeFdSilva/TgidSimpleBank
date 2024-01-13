@@ -1,5 +1,6 @@
 package br.com.tgidSimpleBank.SimpleBank.services;
 
+import br.com.tgidSimpleBank.SimpleBank.helpers.exceptions.InsufficientBalanceException;
 import br.com.tgidSimpleBank.SimpleBank.models.transactions.Transaction;
 import br.com.tgidSimpleBank.SimpleBank.models.users.inherited.Company;
 import br.com.tgidSimpleBank.SimpleBank.repositories.CompanyRepository;
@@ -51,7 +52,7 @@ public class CompanyService {
         if (target.withdrawal(transaction.getTotalValue())) {
             repository.save(target);
         } else {
-            throw new IllegalArgumentException("Saldo insuficiente");
+            throw new InsufficientBalanceException();
         }
     }
 }
