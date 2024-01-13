@@ -14,11 +14,11 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Entity
 @Table(name = "plans")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "name")
 public class Plan {
     @Id
     private Long id;
-    @Column(nullable = false)
-    private String name;
     @Column(nullable = false)
     private Double withdrawalFee;
     @Column(nullable = false)
