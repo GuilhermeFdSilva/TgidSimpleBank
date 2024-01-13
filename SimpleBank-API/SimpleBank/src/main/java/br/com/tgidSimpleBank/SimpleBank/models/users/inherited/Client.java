@@ -18,4 +18,8 @@ public class Client extends User {
     private String cpf;
     @ManyToOne
     private Company company;
+
+    public boolean validateCpf() {
+        return this.cpf.replaceAll("\\D", "").length() == 11;
+    }
 }
