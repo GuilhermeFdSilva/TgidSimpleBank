@@ -152,6 +152,7 @@ public class ClientControllerTest {
 
         ResponseEntity<?> response = controller.createClient(CLIENT);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertNull(response.getBody());
     }
 
     @Test
@@ -185,7 +186,9 @@ public class ClientControllerTest {
 
     @Test
     void testDeleteInvalidClient() {
-        ResponseEntity<?> response = controller.deleteClient(0L);
+        doThrow(EntityNotFoundException.class).when(service).deleteClient(1L);
+
+        ResponseEntity<?> response = controller.deleteClient(1L);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNull(response.getBody());
     }
