@@ -25,6 +25,15 @@ public class ClientService {
         }
     }
 
+    public Client updateClient(Client client) {
+        Long id = client.getId();
+        if (id != null && id > 0 && repository.existsById(id)) {
+            return repository.save(client);
+        } else {
+            throw new EntityNotFoundException("Cliente não encontrado");
+        }
+    }
+
     public void deleteClient(Long id) {
         if (id != null && id > 0 && repository.existsById(id)) {
             repository.deleteById(id);

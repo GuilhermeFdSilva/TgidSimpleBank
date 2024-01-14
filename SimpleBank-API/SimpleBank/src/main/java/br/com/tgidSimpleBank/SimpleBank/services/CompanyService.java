@@ -21,6 +21,15 @@ public class CompanyService {
         }
     }
 
+    public Company updateCompany(Company company) {
+        Long id = company.getId();
+        if (id != null && id > 0 && repository.existsById(id)) {
+            return repository.save(company);
+        } else {
+            throw new EntityNotFoundException("Empresa não encontrada");
+        }
+    }
+
     public void deleteCompany(Long id) {
         if (id != null && id > 0 && repository.existsById(id)) {
             repository.deleteById(id);
