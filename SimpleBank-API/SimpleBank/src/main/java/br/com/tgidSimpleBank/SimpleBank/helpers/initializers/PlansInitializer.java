@@ -30,9 +30,6 @@ public class PlansInitializer implements CommandLineRunner {
 
         List<Plan> planList = Plan.getRegisteredPlans();
 
-        String response = "" +
-                repository.saveAll(Plan.getRegisteredPlans());
-
-        System.out.println(response);
+        repository.saveAll(Plan.getRegisteredPlans());
     }
 }
