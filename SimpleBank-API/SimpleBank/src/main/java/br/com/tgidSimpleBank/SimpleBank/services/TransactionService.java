@@ -34,7 +34,7 @@ public class TransactionService {
         }
     }
 
-    private Transaction buildTransaction(Client author, Transaction.TransactionType type, Double value) {
+    protected Transaction buildTransaction(Client author, Transaction.TransactionType type, Double value) {
         Plan plan = author.getCompany().getPlan();
 
         java.util.Date javaDateNow = Calendar.getInstance().getTime();

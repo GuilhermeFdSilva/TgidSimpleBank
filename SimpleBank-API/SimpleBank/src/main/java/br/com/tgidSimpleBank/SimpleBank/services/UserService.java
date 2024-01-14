@@ -22,14 +22,4 @@ public class UserService {
 
         return users;
     }
-
-    public User validateLoginByEmail(User user) {
-        User userOnDB = repository.findByEmail(user.getEmail());
-
-        if (userOnDB == null || !userOnDB.getPassword().equals(user.getPassword())) {
-            throw new EntityNotFoundException("Dados do usuário incorretos");
-        }
-
-        return userOnDB;
-    }
 }
