@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.Instant;
+import java.util.Calendar;
 
 @Service
 public class TransactionService {
@@ -23,9 +23,11 @@ public class TransactionService {
         switch (type) {
             case DEPOSIT:
                 companyService.registerDeposit(transaction);
+                repository.save(transaction);
                 return transaction;
             case WITHDRAWAL:
                 companyService.registerWithdrawal(transaction);
+                repository.save(transaction);
                 return transaction;
             default:
                 throw new IllegalArgumentException("Transação inválida");
@@ -34,7 +36,10 @@ public class TransactionService {
 
     private Transaction buildTransaction(Client author, Transaction.TransactionType type, Double value) {
         Plan plan = author.getCompany().getPlan();
-        Date now = (Date) java.util.Date.from(Instant.now());
+
+        java.util.Date javaDateNow = Calendar.getInstance().getTime();
+        Date now = new Date(javaDateNow.getTime());
+
         double fee = 0.0;
         double totalValue = 0.0;
 

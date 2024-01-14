@@ -8,6 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 @Service
 public class CompanyService {
     @Autowired
@@ -15,6 +18,10 @@ public class CompanyService {
 
     public Company createCompany(Company company) {
         if (company.validateCnpj()) {
+            java.util.Date javaDateNow = Calendar.getInstance().getTime();
+            Date now = new Date(javaDateNow.getTime());
+
+            company.setCreatedAt(now);
             return repository.save(company);
         } else {
             throw new IllegalArgumentException("CNPJ inválido");

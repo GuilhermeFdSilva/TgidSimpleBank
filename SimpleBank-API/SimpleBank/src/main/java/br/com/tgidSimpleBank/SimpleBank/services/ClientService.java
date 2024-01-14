@@ -8,6 +8,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -19,6 +21,10 @@ public class ClientService {
 
     public Client createClient(Client client) {
         if (client.validateCpf()) {
+            java.util.Date javaDateNow = Calendar.getInstance().getTime();
+            Date now = new Date(javaDateNow.getTime());
+
+            client.setCreatedAt(now);
             return repository.save(client);
         } else {
             throw new IllegalArgumentException("CPF inválido");
