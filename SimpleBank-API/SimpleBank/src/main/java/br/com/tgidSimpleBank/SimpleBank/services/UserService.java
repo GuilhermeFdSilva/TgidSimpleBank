@@ -14,11 +14,13 @@ public class UserService {
     private UserRepository repository;
 
     public List<User> listAllUsers() {
-        return repository.findAll();
-    }
+        List<User> users = repository.findAll();
 
-    public User findUserById(Long id) {
-        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        if (users.isEmpty()) {
+            throw new EntityNotFoundException("Usuários não encontrados");
+        }
+
+        return users;
     }
 
     public User validateLoginByEmail(User user) {
