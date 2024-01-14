@@ -36,7 +36,8 @@ public class Transaction {
 
     public enum TransactionType {
         DEPOSIT,
-        WITHDRAWAL
+        WITHDRAWAL,
+        INVALID
     }
 }
 

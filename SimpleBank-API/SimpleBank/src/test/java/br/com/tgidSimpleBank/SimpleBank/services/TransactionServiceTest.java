@@ -13,7 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -49,7 +50,7 @@ public class TransactionServiceTest {
         assertEquals(AUTHOR, responseTransaction.getAuthor());
         assertEquals(type, responseTransaction.getType());
         assertEquals(VALUE, responseTransaction.getValue());
-        verify(companyService,times(1)).registerDeposit(responseTransaction);
+        verify(companyService, times(1)).registerDeposit(responseTransaction);
         verify(repository, times(1)).save(responseTransaction);
     }
 
@@ -62,7 +63,16 @@ public class TransactionServiceTest {
         assertEquals(AUTHOR, responseTransaction.getAuthor());
         assertEquals(type, responseTransaction.getType());
         assertEquals(VALUE, responseTransaction.getValue());
-        verify(companyService,times(1)).registerWithdrawal(responseTransaction);
+        verify(companyService, times(1)).registerWithdrawal(responseTransaction);
         verify(repository, times(1)).save(responseTransaction);
+    }
+
+    @Test
+    void testInvalidTypeRegister() {
+        Transaction.TransactionType type = Transaction.TransactionType.INVALID;
+
+        assertThrows(IllegalArgumentException.class, () -> service.registerTransaction(AUTHOR, type, VALUE));
+        verify(companyService, never()).registerDeposit(any());
+        verify(repository, never()).save(any());
     }
 }
