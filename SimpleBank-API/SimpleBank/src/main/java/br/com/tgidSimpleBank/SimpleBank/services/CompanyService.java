@@ -29,8 +29,8 @@ public class CompanyService {
         }
     }
 
-    private Company validateLoginByCnpj(Company company) {
-        Company companyOnDB = repository.findByCnpj(company.getPassword());
+    public Company validateLoginByCnpj(Company company) {
+        Company companyOnDB = repository.findByCnpj(company.getCnpj());
 
         if (companyOnDB == null || !companyOnDB.getPassword().equals(company.getPassword())) {
             throw new EntityNotFoundException("Dados do usuário incorretos");
